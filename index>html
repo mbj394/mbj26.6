@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>دفترنا | دفتر الديون للمحلات</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2B47D6"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;--bg:#F3F4F7;--sf:#fff;--ink:#141B2D;--mu:#697086;--ln:#E3E6EE;--ac:#2B47D6;--acs:#E8ECFD;--on:#fff;--debt:#C4372D;--debts:#FCEBE9;--ok:#1B8A57;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1320;--sf:#181E30;--ink:#EEF0F7;--mu:#98A0B8;--ln:#2A3149;--ac:#8EA2FF;--acs:#232C55;--on:#0F1320;--debt:#FF7B6E;--debts:#3A1F24;--ok:#4AD18B}}
+:root[data-theme="dark"]{--bg:#0F1320;--sf:#181E30;--ink:#EEF0F7;--mu:#98A0B8;--ln:#2A3149;--ac:#8EA2FF;--acs:#232C55;--on:#0F1320;--debt:#FF7B6E;--debts:#3A1F24;--ok:#4AD18B}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.6 'IBM Plex Sans Arabic',Tahoma,system-ui,sans-serif}
+.app{max-width:1060px;margin:0 auto;padding:18px 16px 48px}
+button,input,select,a{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.logo{width:36px;height:36px;border-radius:10px;background:var(--ac);color:var(--on);display:grid;place-items:center;font-weight:700;font-size:20px}
+.top h1{font-size:20px;font-weight:700;margin-inline-end:auto}
+.top input,.top select,dialog input{border:1px solid var(--ln);background:var(--sf);border-radius:10px;padding:8px 12px;width:100%}
+.top input{width:170px}.top select{width:auto}
+.hero{background:var(--sf) repeating-linear-gradient(to bottom,transparent 0 33px,var(--ln) 33px 34px);border:1px solid var(--ln);border-radius:18px;padding:22px 20px 18px 20px;padding-inline-start:70px;margin:18px 0;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset-block:0;inset-inline-start:46px;width:2px;background:var(--debt);opacity:.4}
+.hero p{color:var(--mu)}
+.big{font-size:clamp(40px,9vw,66px);font-weight:700;line-height:1.2;color:var(--debt);font-variant-numeric:tabular-nums}
+.big small{font-size:.3em;color:var(--mu);font-weight:500}
+#st{display:flex;flex-wrap:wrap;gap:8px 32px;margin-top:12px;background:var(--sf);padding:6px 0;width:fit-content;max-width:100%}
+#st div{color:var(--mu);font-size:13px}#st b{display:block;font-size:20px;color:var(--ink);font-variant-numeric:tabular-nums}
+.cols{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:16px;align-items:start}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:16px;overflow:hidden}
+.tools{padding:12px;display:grid;gap:10px;border-bottom:1px solid var(--ln)}
+.tools input{border:1px solid var(--ln);background:var(--bg);border-radius:10px;padding:9px 12px;width:100%}
+.chips{display:flex;gap:6px;align-items:center}.chips .btn:nth-last-child(2){margin-inline-start:auto}
+.chip{border:1px solid var(--ln);background:transparent;border-radius:99px;padding:3px 12px;font-size:13px;cursor:pointer}
+.chip.on{background:var(--acs);border-color:var(--ac);color:var(--ac)}
+.row{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border:0;border-bottom:1px solid var(--ln);background:transparent;text-align:start;cursor:pointer}
+.row.on{background:var(--acs)}
+.av{width:38px;height:38px;border-radius:50%;background:var(--acs);color:var(--ac);display:grid;place-items:center;font-weight:700;flex:none}
+.nm{flex:1;min-width:0;display:flex;flex-direction:column}.nm small{color:var(--mu)}
+.tag{font-style:normal;background:var(--debts);color:var(--debt);padding:1px 8px;border-radius:99px;font-size:12px;width:fit-content}
+.am{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.d{color:var(--debt)}.o{color:var(--ok)}.mu{color:var(--mu)}
+.btn{border:1px solid var(--ln);background:var(--sf);padding:8px 14px;border-radius:10px;font-weight:500;font-size:14px;cursor:pointer;text-decoration:none;display:inline-block}
+.pri{background:var(--ac);border-color:var(--ac);color:var(--on)}
+.pay{background:var(--ok);border-color:var(--ok);color:var(--on)}
+.d2{border-color:var(--debt);color:var(--debt)}
+.wa{border-color:var(--ok);color:var(--ok)}
+.emp{padding:28px 18px;text-align:center;color:var(--mu)}.emp b{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}.emp .btn{margin:12px 3px 0}
+#det{padding:18px;position:sticky;top:16px}
+#det h2{font-size:22px}
+.bl{margin:14px 0;padding:12px 16px;border-radius:12px;background:var(--bg);display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.bl strong{font-size:30px;font-variant-numeric:tabular-nums}.bl small{font-size:14px;color:var(--mu)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tr{display:grid;grid-template-columns:1fr 58px 58px 66px 22px;gap:6px;align-items:center;padding:9px 0;border-bottom:1px solid var(--ln);font-size:14px;font-variant-numeric:tabular-nums}
+.tr small{display:block;color:var(--mu);font-size:12px}.tr span:not(:first-child){text-align:end}
+.th{color:var(--mu);font-size:12px;padding-top:0}
+.x{border:0;background:none;color:var(--mu);cursor:pointer;font-size:12px;padding:0}
+.del{margin-top:20px;color:var(--mu);font-size:13px}
+.back{display:none;margin-bottom:12px}
+dialog{border:0;border-radius:18px;padding:22px;width:min(92vw,380px);background:var(--sf);color:var(--ink)}
+dialog::backdrop{background:rgba(10,14,30,.55)}
+dialog h3{margin-bottom:12px}dialog label{display:block;margin-bottom:12px;font-size:13px;color:var(--mu)}
+dialog input.bad{border-color:var(--debt)}
+.ft{display:flex;gap:8px;justify-content:flex-end}
+#toast{position:fixed;inset-inline:0;bottom:calc(24px + env(safe-area-inset-bottom,0px));margin:auto;width:fit-content;background:var(--ink);color:var(--bg);padding:9px 18px;border-radius:99px;opacity:0;transform:translateY(12px);transition:.25s;pointer-events:none;z-index:50}
+#toast.on{opacity:1;transform:none}
+@media(max-width:859px){.cols{grid-template-columns:1fr}#det{display:none}#det.open{display:block;position:fixed;inset:0;z-index:20;overflow:auto;border-radius:0;border:0;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px))}.back{display:inline-block}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+#gate{display:grid;place-items:center;min-height:85vh;padding:24px 16px}#gate[hidden]{display:none}
+#gate .card{width:min(100%,400px);padding:28px 24px}#gate h2{margin:14px 0 4px;font-size:22px}
+#gate label{display:block;margin-top:14px;font-size:13px;color:var(--mu)}
+#gate input{border:1px solid var(--ln);background:var(--bg);border-radius:10px;padding:11px 14px;width:100%;margin-top:4px}
+#gate #code{direction:ltr;text-align:center;letter-spacing:.3em;font-size:22px;font-weight:700;text-transform:uppercase}
+#gate .btn{width:100%;text-align:center;margin-top:14px;padding:11px}
+#gate .err{margin-top:14px;padding:12px;border-radius:10px;background:var(--debts);color:var(--debt);font-size:14px}
+#gate .sub{margin-top:18px;border-top:1px solid var(--ln);padding-top:14px;text-align:center;color:var(--mu);font-size:13px}
+[hidden]{display:none!important}
+.big{display:flex;flex-wrap:wrap;gap:0 28px}
+.bl{flex-wrap:wrap;gap:8px 28px;justify-content:flex-start}.bl>div>small{display:block;font-size:13px}
+dialog select{border:1px solid var(--ln);background:var(--sf);border-radius:10px;padding:8px}
+.x.rc{color:var(--ac);margin-inline-start:6px;font-size:12px}
+.rh{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:6px;font-size:18px}
+.rr{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--ln)}.rr>span{color:var(--mu)}
+.rr.sg{margin-top:34px;border:0}.rr.sg span{border-top:1px solid var(--mu);padding-top:6px;min-width:110px;text-align:center}
+@media print{html:root:not([data-print]){--sf:#fff;--ink:#000;--mu:#555;--ln:#bbb;--bg:#fff;--ok:#1B7A4B}.app,#gate,#toast,.no{display:none!important}dialog{position:static;width:100%;box-shadow:none;border:1px solid #000}}
+#lock{display:grid;place-items:center;min-height:85vh;padding:24px 16px}
+#lock .card{width:min(100%,340px);padding:28px 24px;text-align:center}#lock .logo{margin:0 auto}#lock h2{margin:14px 0 4px;font-size:22px}
+#lock input{border:1px solid var(--ln);background:var(--bg);border-radius:10px;padding:10px 14px;width:100%;margin-top:10px;text-align:center}
+.dots{display:flex;justify-content:center;gap:14px;margin:18px 0}.dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--ac)}
+.dots i.on{background:var(--ac)}.dots.bad{animation:sh .3s}@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;direction:ltr;margin-bottom:14px}
+.pad button{height:56px;border-radius:14px;border:1px solid var(--ln);background:var(--bg);color:var(--ink);font-size:22px;font-weight:500;cursor:pointer}
+.pad button[data-v=b]{font-size:15px}
+</style>
+</head>
+<body>
+<div id="gate"><div class="card">
+  <div class="logo">د</div><h2>أهلاً بك في دفترنا</h2><p class="mu">أدخل بيانات اشتراكك لفتح دفترك.</p>
+  <label>اسم الشركة<input id="co" autocomplete="organization"></label>
+  <label>رقم الاشتراك (6 رموز)<input id="code" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="A7K9PX"></label>
+  <div id="err" class="err" hidden></div>
+  <button class="btn pri" id="go">دخول</button>
+  <div class="sub">لست مشتركاً في برنامجنا؟<a class="btn wa" id="sub" target="_blank" rel="noopener">اشترك الآن عبر واتساب</a></div>
+</div></div>
+<div id="lock" hidden><div class="card">
+  <div class="logo">د</div><h2>أدخل رمز PIN</h2><p class="mu" id="lm">الدفتر مقفل لحماية بياناتك.</p>
+  <div class="dots" id="dots"><i></i><i></i><i></i><i></i></div>
+  <div class="pad" id="pad"></div>
+  <button class="btn" data-act="fp">نسيت رمز PIN؟</button>
+  <div id="fpbox" hidden><input id="fpc" maxlength="6" autocomplete="off" placeholder="أدخل رقم الاشتراك" style="direction:ltr;text-transform:uppercase"><button class="btn pri" data-act="fpgo" style="margin-top:10px;width:100%">تأكيد وإزالة الـ PIN</button></div>
+</div></div>
+<div class="app" id="app" hidden>
+  <div class="top">
+    <div class="logo">د</div><h1>دفترنا</h1>
+    <input id="shop" placeholder="اسم محلك" aria-label="اسم المحل">
+    <select id="cur" aria-label="العملة الافتراضية" title="العملة الافتراضية"></select>
+    <button class="btn pri" id="inst" data-act="inst" hidden>تثبيت التطبيق</button>
+    <button class="btn" data-act="bk">نسخة احتياطية</button>
+    <button class="btn" data-act="rs">استرجاع</button>
+    <button class="btn" data-act="pin">رمز PIN</button>
+    <button class="btn" data-act="out">خروج</button>
+    <input id="rf" type="file" accept=".json,application/json" hidden>
+  </div>
+  <section class="hero">
+    <p>إجمالي الديون المستحقة لك</p>
+    <div class="big" id="owed"></div>
+    <div id="st"></div>
+  </section>
+  <div class="cols">
+    <div class="card">
+      <div class="tools">
+        <input id="q" type="search" placeholder="ابحث بالاسم أو الرقم" aria-label="بحث">
+        <div class="chips">
+          <button class="chip on" data-act="flt" data-v="all">الكل</button>
+          <button class="chip" data-act="flt" data-v="late">المتأخرون</button>
+          <button class="btn" data-act="imp">استيراد Excel</button>
+          <button class="btn pri" data-act="newc">إضافة زبون</button>
+        </div>
+      </div>
+      <div id="list"></div>
+      <p class="emp" style="font-size:12px;padding:12px;border-top:1px solid var(--ln)">بياناتك محفوظة على هذا الجهاز فقط. نزّل نسخة احتياطية بشكل دوري. للتثبيت على الآيفون: مشاركة ثم إضافة إلى الشاشة الرئيسية.</p>
+    </div>
+    <div class="card" id="det"></div>
+  </div>
+</div>
+<dialog id="dlg"></dialog>
+<div id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s),DAY=864e5;let K='',CODE='',booted=false;
+let S={shop:'',cur:'د.أ',cs:[]},sel=null,q='',flt='all';
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const uid=()=>Math.random().toString(36).slice(2,9);
+const CURS=['د.أ','ر.س','د.إ','ج.م','ل.ل','ل.س','د.ع','$','€'];
+const r2=x=>Math.round(x*100)/100;
+const bals=c=>{const o={};c.tx.forEach(t=>o[t.c]=r2((o[t.c]||0)+t.a));return o};
+const bal=(c,k)=>bals(c)[k]||0;
+const owes=c=>Object.entries(bals(c)).filter(e=>e[1]>0);
+const show=o=>Object.entries(o).filter(e=>Math.abs(e[1])>0).map(e=>fmt(e[1])+' '+e[0]).join(' + ');
+const mig=()=>S.cs.forEach(c=>c.tx.forEach(t=>{t.c=t.c||S.cur}));
+const fmt=n=>Math.abs(n).toLocaleString('en-US',{maximumFractionDigits:2});
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const last=c=>c.tx.length?Math.max(...c.tx.map(t=>t.d)):0;
+const days=c=>Math.floor((Date.now()-last(c))/DAY);
+const late=c=>owes(c).length>0&&days(c)>=30;
+const dt=t=>new Date(t).toLocaleDateString('ar-u-nu-latn',{day:'numeric',month:'short',year:'2-digit'});
+const cur=()=>S.cs.find(c=>c.id==sel);
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),2200)};
+
+const wu=(p,m)=>`https://wa.me/${p.replace(/\D/g,'').replace(/^00/,'')}?text=${encodeURIComponent(m)}`;
+function wl(c,k){
+  const shop=S.shop||'محلّنا';
+  const m=k=='r'?`مرحباً ${c.name}،\nتذكير ودّي من ${shop}: رصيدك المستحق ${owes(c).map(e=>fmt(e[1])+' '+e[0]).join(' + ')}.\nنرجو التسديد في أقرب وقت. شكراً لتعاملك معنا.`
+  :`كشف حساب ${c.name} - ${shop}\n`+[...c.tx].sort((x,y)=>x.d-y.d).map(t=>`${dt(t.d)}: ${t.a>0?'دين':'دفعة'} ${fmt(t.a)} ${t.c}${t.n?' ('+t.n+')':''}`).join('\n')+`\nالرصيد: ${show(bals(c))||'مسدّد'}`;
+  return wu(c.phone,m);
+}
+
+function render(){
+  const cs=S.cs,m=Date.now()-30*DAY,T={},P={};
+  cs.forEach(c=>{Object.entries(bals(c)).forEach(([k,v])=>{if(v>0)T[k]=r2((T[k]||0)+v)});c.tx.forEach(t=>{if(t.a<0&&t.d>=m)P[t.c]=r2((P[t.c]||0)-t.a)})});
+  const ks=Object.keys(T);
+  $('#owed').innerHTML=ks.length?ks.map(k=>`<span>${fmt(T[k])} <small>${k}</small></span>`).join(''):`<span>0 <small>${S.cur}</small></span>`;
+  $('#st').innerHTML=`<div><b>${cs.filter(c=>owes(c).length).length}</b>زبون عليهم دين</div><div><b class="d">${cs.filter(late).length}</b>متأخرون أكثر من 30 يوماً</div><div><b class="o">${show(P)||0}</b>تم تحصيله آخر 30 يوماً</div>`;
+  list();det();
+}
+
+function list(){
+  document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x.dataset.v==flt));
+  const sc=c=>bal(c,S.cur)*1e3+owes(c).length;
+  const L=S.cs.filter(c=>(c.name+c.phone).includes(q)&&(flt=='all'||late(c))).sort((a,b)=>sc(b)-sc(a));
+  const am=c=>{const o=owes(c);if(o.length)return `<span class="am d">${o.map(e=>fmt(e[1])+' '+e[0]).join('<br>')}</span>`;const n=Object.entries(bals(c)).filter(e=>e[1]<0);return `<span class="am o">${n.length?'له '+n.map(e=>fmt(e[1])+' '+e[0]).join(' + '):'مسدّد'}</span>`};
+  $('#list').innerHTML=L.length?L.map(c=>`<button class="row${c.id==sel?' on':''}" data-act="open" data-id="${c.id}"><span class="av">${esc(c.name[0])}</span><span class="nm"><b>${esc(c.name)}</b><small>${late(c)?`<i class="tag">متأخر ${days(c)} يوم</i>`:last(c)?'آخر حركة '+dt(last(c)):'بدون حركات'}</small></span>${am(c)}</button>`).join('')
+  :S.cs.length?'<p class="emp">لا يوجد زبائن مطابقون.</p>'
+  :'<div class="emp"><b>دفترك فاضي</b>أضف أول زبون وسجّل ديونه، أو استورد زبائنك من Excel، أو جرّب ببيانات تجريبية.<br><button class="btn pri" data-act="newc">إضافة زبون</button><button class="btn" data-act="imp">استيراد Excel</button><button class="btn" data-act="demo">بيانات تجريبية</button></div>';
+}
+
+function det(){
+  const c=cur(),el=$('#det');
+  el.classList.toggle('open',!!c);
+  if(!c){el.innerHTML='<p class="emp">اختر زبوناً لعرض كشف حسابه.</p>';return}
+  const run={},bl=Object.entries(bals(c)).filter(e=>Math.abs(e[1])>0);
+  const rows=[...c.tx].sort((x,y)=>x.d-y.d).map(t=>({...t,r:run[t.c]=r2((run[t.c]||0)+t.a)})).reverse();
+  el.innerHTML=`<button class="btn back" data-act="back">رجوع للقائمة</button>
+  <h2>${esc(c.name)}</h2><p class="mu">${esc(c.phone)||'لا يوجد رقم واتساب'}</p>
+  <div class="bl">${bl.length?bl.map(([k,v])=>`<div><small>${v>0?'مستحق عليه':'له عندك'}</small><strong class="${v>0?'d':'o'}">${fmt(v)} <small>${k}</small></strong></div>`).join(''):'<strong class="o">الحساب مسدّد</strong>'}</div>
+  <div class="acts"><button class="btn d2" data-act="debt">تسجيل دين</button><button class="btn pay" data-act="pay">تسجيل دفعة</button>${owes(c).length?`<a class="btn wa" target="_blank" rel="noopener" href="${wl(c,'r')}">تذكير بالواتساب</a>`:''}<a class="btn wa" target="_blank" rel="noopener" href="${wl(c,'s')}">إرسال كشف الحساب</a></div>
+  <div class="tr th"><span>البيان</span><span>دين</span><span>دفعة</span><span>الرصيد</span><i></i></div>
+  ${rows.map(t=>`<div class="tr"><span><b>${esc(t.n||(t.a>0?'دين':'دفعة'))}</b><small>${dt(t.d)} · ${t.c}${t.a<0?`<button class="x rc" data-act="rcp" data-id="${t.id}">سند قبض</button>`:''}</small></span><span class="d">${t.a>0?fmt(t.a):''}</span><span class="o">${t.a<0?fmt(t.a):''}</span><span>${t.r<0?'−':''}${fmt(t.r)}</span><button class="x" data-act="deltx" data-id="${t.id}" aria-label="حذف الحركة">حذف</button></div>`).join('')||'<p class="emp">لا توجد حركات بعد. سجّل أول دين.</p>'}
+  <button class="btn del" data-act="delc">حذف الزبون</button>`;
+}
+
+function ask(t){
+  const d=$('#dlg'),f='<div class="ft"><button class="btn" data-act="cancel">إلغاء</button><button class="btn pri" data-act="ok">'+(t=='i'?'استيراد':'حفظ')+'</button></div>';
+  d.dataset.t=t;
+  d.innerHTML=t=='c'
+    ?`<h3>زبون جديد</h3><label>الاسم<input id="f1" autocomplete="off"></label><label>رقم واتساب مع رمز الدولة (اختياري)<input id="f2" inputmode="tel" placeholder="962791234567"></label>${f}`
+  :t=='i'
+    ?`<h3>استيراد زبائن من Excel</h3><p class="mu" style="font-size:13px;margin-bottom:12px">الأعمدة: الاسم، الهاتف، المبلغ المستحق، العملة (اختيارية). السطر الأول عناوين. إذا تُركت العملة فارغة تُستخدم العملة الافتراضية.</p><button class="btn" data-act="tpl" style="margin-bottom:12px">تنزيل نموذج جاهز</button><label>ملف Excel أو CSV<input id="xf" type="file" accept=".xlsx,.xls,.csv"></label><p id="xp" class="mu" style="margin-bottom:12px"></p>${f}`
+    :`<h3>${t=='d'?'تسجيل دين':'تسجيل دفعة'}</h3><label>المبلغ<div style="display:flex;gap:8px"><input id="f1" type="number" inputmode="decimal" min="0" step="any"><select id="f4">${CURS.map(k=>`<option${k==S.cur?' selected':''}>${k}</option>`).join('')}</select></div></label><label>البيان (اختياري)<input id="f2" autocomplete="off"></label><label>التاريخ<input id="f3" type="date" value="${new Date().toISOString().slice(0,10)}"></label>${f}`;
+  d.showModal();
+  if(t=='i'){pend=[];$('#xf').onchange=e=>e.target.files[0]&&readX(e.target.files[0])}else $('#f1').focus();
+}
+
+function submit(){
+  const d=$('#dlg'),t=d.dataset.t;let nid=null;
+  if(t=='k')return pinSave();
+  if(t=='i'){
+    if(!pend.length)return;
+    pend.forEach(r=>{let c=S.cs.find(x=>x.name==r.name);if(!c)S.cs.push(c={id:uid(),name:r.name,phone:r.phone,tx:[]});if(r.a)c.tx.push({id:uid(),d:Date.now(),a:r.a,n:'رصيد افتتاحي',c:r.c})});
+    toast('تم استيراد '+pend.length+' زبون');pend=[];
+  }else{
+    const v=$('#f1').value.trim(),bad=()=>{$('#f1').classList.add('bad');$('#f1').focus()};
+    if(t=='c'){if(!v)return bad();const c={id:uid(),name:v,phone:$('#f2').value.trim(),tx:[]};S.cs.push(c);sel=c.id;toast('تمت إضافة الزبون')}
+    else{const a=parseFloat(v);if(!(a>0))return bad();nid=uid();
+      cur().tx.push({id:nid,d:new Date($('#f3').value+'T12:00:00').getTime()||Date.now(),a:t=='d'?a:-a,n:$('#f2').value.trim(),c:$('#f4').value,...(t=='p'?{rn:S.rn=(S.rn||0)+1}:{})});
+      toast(t=='d'?'تم تسجيل الدين':'تم تسجيل الدفعة')}
+  }
+  save();d.close();render();
+  if(nid&&t=='p')rcp(nid);
+}
+
+function rcp(id){
+  const c=cur(),t=c.tx.find(x=>x.id==id),d=$('#dlg');
+  if(!t.rn){t.rn=S.rn=(S.rn||0)+1;save()}
+  let r=0;for(const x of [...c.tx].sort((a,b)=>a.d-b.d)){if(x.c==t.c)r+=x.a;if(x.id==id)break}
+  r=r2(r);const rs=r>0?fmt(r)+' '+t.c:r<0?'له '+fmt(r)+' '+t.c:'مسدّد',shop=S.shop||'محلّنا';
+  const m=`سند قبض رقم ${t.rn} - ${shop}\nالتاريخ: ${dt(t.d)}\nاستلمنا من: ${c.name}\nالمبلغ: ${fmt(t.a)} ${t.c}${t.n?'\nعن: '+t.n:''}\nالرصيد المتبقي: ${rs}\nشكراً لك.`;
+  d.dataset.t='r';
+  d.innerHTML=`<div class="rh"><b>${esc(shop)}</b><span>سند قبض رقم ${t.rn}</span></div><p class="mu">${dt(t.d)}</p>
+  <div class="rr"><span>استلمنا من</span><b>${esc(c.name)}</b></div>
+  <div class="rr"><span>مبلغ وقدره</span><b class="o">${fmt(t.a)} ${t.c}</b></div>
+  ${t.n?`<div class="rr"><span>وذلك عن</span><b>${esc(t.n)}</b></div>`:''}
+  <div class="rr"><span>الرصيد المتبقي</span><b>${rs}</b></div>
+  <div class="rr sg"><span>توقيع المستلم</span><span>توقيع الدافع</span></div>
+  <div class="ft no" style="margin-top:18px"><button class="btn" data-act="cancel">إغلاق</button><a class="btn wa" target="_blank" rel="noopener" href="${wu(c.phone,m)}">واتساب</a><button class="btn pri" data-act="print">طباعة / PDF</button></div>`;
+  d.showModal();
+}
+
+let pend=[],ip=null;
+const lib=()=>window.XLSX?Promise.resolve():new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';s.onload=ok;s.onerror=no;document.head.appendChild(s)});
+const CM={usd:'$','دولار':'$',eur:'€','يورو':'€',jod:'د.أ',sar:'ر.س',aed:'د.إ',egp:'ج.م',lbp:'ل.ل',syp:'ل.س',iqd:'د.ع'};
+async function readX(f){
+  const p=$('#xp');p.textContent='جارٍ قراءة الملف...';pend=[];
+  try{
+    await lib();
+    const w=XLSX.read(await f.arrayBuffer(),{type:'array'}),R=XLSX.utils.sheet_to_json(w.Sheets[w.SheetNames[0]],{header:1,defval:''});
+    const h=(R[0]||[]).map(x=>String(x).toLowerCase()),ix=(re,d)=>{const i=h.findIndex(x=>re.test(x));return i<0?d:i};
+    const hd=h.some(x=>/اسم|name|هاتف|phone|مبلغ|رصيد|amount|balance/.test(x));
+    const n=ix(/اسم|name|زبون|عميل/,0),ph=ix(/هاتف|جوال|موبايل|واتس|phone|mobile|tel/,1),am=ix(/مبلغ|رصيد|دين|amount|balance|debt/,2),cu=ix(/عملة|currency/,3);
+    const dg=s=>String(s).replace(/[٠-٩]/g,x=>'٠١٢٣٤٥٦٧٨٩'.indexOf(x)).replace(/[,،\s]/g,'');
+    R.slice(hd?1:0).forEach(r=>{const name=String(r[n]).trim();if(!name)return;const k=String(r[cu]).trim(),a=parseFloat(dg(r[am]));
+      pend.push({name,phone:String(r[ph]).trim(),a:isNaN(a)?0:a,c:CURS.includes(k)?k:CM[k.toLowerCase()]||S.cur})});
+    const T={};pend.forEach(r=>{if(r.a>0)T[r.c]=r2((T[r.c]||0)+r.a)});
+    p.textContent=pend.length?`جاهز لاستيراد ${pend.length} زبون. إجمالي الديون: ${show(T)||'0'}`:'لم أجد زبائن في الملف. تأكد أن العمود الأول هو الاسم.';
+  }catch(e){p.textContent='تعذّر قراءة الملف أو تحميل مكتبة Excel. تأكد من اتصالك بالإنترنت.'}
+}
+
+function conf(b,fn){
+  if(b.dataset.s)return fn();
+  b.dataset.s=1;const o=b.textContent;b.textContent='اضغط للتأكيد';
+  setTimeout(()=>{delete b.dataset.s;b.textContent=o},3000);
+}
+
+function demo(){
+  const T=(n,a,t,k=S.cur)=>({id:uid(),d:Date.now()-n*DAY,a,n:t,c:k});
+  S.cs=[{id:uid(),name:'أبو خالد',phone:'',tx:[T(45,60,'مواد غذائية'),T(40,-20,''),T(38,35,'خضار ولبن')]},
+        {id:uid(),name:'أم محمد',phone:'',tx:[T(9,18.5,'بقالة'),T(3,12,'خبز وحليب')]},
+        {id:uid(),name:'مطعم الياسمين',phone:'',tx:[T(20,240,'طلبية شهرية'),T(6,-240,'دفعة كاملة'),T(2,100,'طلبية مستوردة','$')]}];
+  save();render();
+}
+
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;
+  const a=b.dataset.act,id=b.dataset.id;
+  if(a=='open'){sel=id;render()}
+  else if(a=='back'){sel=null;render()}
+  else if(a=='newc')ask('c');
+  else if(a=='imp')ask('i');
+  else if(a=='pin')pinDlg();
+  else if(a=='pinrm')pinRm();
+  else if(a=='lockn'){$('#dlg').close();lockUI()}
+  else if(a=='k')key(b.dataset.v);
+  else if(a=='fp')$('#fpbox').hidden=!$('#fpbox').hidden;
+  else if(a=='fpgo'){if(norm($('#fpc').value)==CODE){ls('.pin',null);ls('.fl',null);ls('.lu',null);unlock();toast('تمت إزالة رمز PIN. عيّن رمزاً جديداً من الأعلى.')}else $('#lm').textContent='رقم الاشتراك غير صحيح'}
+  else if(a=='rcp')rcp(id);
+  else if(a=='print')window.print();
+  else if(a=='inst'&&ip){ip.prompt();ip=null;b.hidden=true}
+  else if(a=='tpl')lib().then(()=>{const w=XLSX.utils.book_new();XLSX.utils.book_append_sheet(w,XLSX.utils.aoa_to_sheet([['الاسم','الهاتف','المبلغ المستحق','العملة'],['أبو خالد','962791234567',60,'د.أ'],['مطعم الياسمين','963934000000',100,'$']]),'الزبائن');XLSX.writeFile(w,'daftarna-template.xlsx')}).catch(()=>toast('تعذّر تحميل مكتبة Excel'));
+  else if(a=='debt')ask('d');
+  else if(a=='pay')ask('p');
+  else if(a=='demo')demo();
+  else if(a=='cancel')$('#dlg').close();
+  else if(a=='ok')submit();
+  else if(a=='flt'){flt=b.dataset.v;list()}
+  else if(a=='bk'){
+    const u=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'})),l=document.createElement('a');
+    l.href=u;l.download='daftarna-backup-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(l);l.click();l.remove();
+    setTimeout(()=>URL.revokeObjectURL(u),1000);try{localStorage.setItem(K+'.bk',Date.now())}catch(e){}toast('تم تنزيل النسخة الاحتياطية');
+  }
+  else if(a=='rs')$('#rf').click();
+  else if(a=='out'){try{localStorage.removeItem(LK)}catch(e){}location.reload()}
+  else if(a=='deltx')conf(b,()=>{const c=cur();c.tx=c.tx.filter(t=>t.id!=id);save();render()});
+  else if(a=='delc')conf(b,()=>{S.cs=S.cs.filter(c=>c.id!=sel);sel=null;save();render()});
+});
+$('#dlg').addEventListener('keydown',e=>{if(e.key=='Enter'&&e.target.tagName=='INPUT')submit()});
+$('#rf').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.cs))throw 0;S=d;mig();sel=null;save();$('#cur').value=S.cur;$('#shop').value=S.shop;render();toast('تم استرجاع النسخة')}catch(x){toast('الملف غير صالح')}};
+  r.readAsText(f);e.target.value='';
+});
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+$('#q').addEventListener('input',e=>{q=e.target.value.trim();list()});
+$('#shop').addEventListener('input',e=>{S.shop=e.target.value;save()});
+$('#cur').addEventListener('change',e=>{S.cur=e.target.value;save();render()});
+$('#cur').innerHTML=CURS.map(c=>`<option>${c}</option>`).join('');
+const WA='963934532008',wal=t=>`https://wa.me/${WA}?text=${encodeURIComponent(t)}`,LK='daftarna.login',SALT='dft|';
+const H=new Set(["86461ce00f162473","f73a11130a66ff22","7b1aabac89ccc37c","eaa350f528350aed","70e31cafed607ab6","a3b757434cb98a76","b3277bee4dadc908","20a13989e6e33307","aa39be5858a8376a","e7f3c5ebcd00731c","23e4c8f32a321997","372e3843533547c4","608784f657dfd302","e1774299e163ffb3","1a489b664419e1ff","60c7574d6c74c15f","d112b644dbd9bcba","19ef765990a0441b","5f7c362fee163af6","c7d891309c541de8","4d11ce62cacf6722","28e77b4f5bc85fe3","fd0b27ca7319b23f","4c7201e65d0f68e5","b03246fb546c603f","ba1729da98f83adb","27a7d91cef1fb0b9","f62edaa126882c18","0094994a6fdb2047","5f34a9fc1faf85a8","72ed43b756d14633","0ec830ae79c1d9a7","7f936d44e5957665","789195d5d0db12d8","faad84a381718d0a","283aa45b26b94591","93f9d05b93fb0186","ff808f19d714763d","78ea45d36f2e15e1","31cab96ceaad407d","b2ece7f5e072f82c","67fd6584b05e7c72","aa2b8f77222c20f5","90394378b4e109db","2c90a3b10d79cd3e","b06a7c7f5a86d6fc","06bda7e538eafbf9","39079d5d3b347495","a9b378a03a998d57","1339d4b17e86f67b","952be99d65d66f2f","48542fa9fd63b640","504a3305bc415fb1","08cfb5b4efdabd64","b01c4cd0e599075e","d7415bef56a9b2aa","7255eb2e731f18cc","93ba39654ba3ea0d","0884634c020bd624","6efbeb5ec7aadd91","c827bb9fa100fd5f","2a92ec53db4e798d","f473f740e4b08a67","bfa08f033846b624","61012953fbfef2a5","74017382a23f0f3b","51aaebe3bfa6893e","d18064ae4188e72c","acc2b88ed3771256","3bab779b2e19b456","3de870f583ae4b7a","1486658cd64942b9","a23b197a39012cf4","835ad303ac3a6f7a","a537de36feee75d9","f679f7088b5a77f2","5058b04dda879bab","0ec711934311236a","5a2a461afbc84776","d4800826a270e791","d94e99e92bc4697b","afba152777c164fa","fe6c37afe6757dc2","32fa6edf2f9f1fae","7a1af2469f57f9b0","7c4c7441749ef32c","4fc35137bf7c76a8","e6de89a0efa1688e","edc02c6a2cef5a25","a5429dd77c4b78c8","7e0099a12d409f93","3d7493c3eac28a33","b5d0f473876976a7","713a81f7c7602786","5559185b575bf15d","7a52ed345b101f1f","35bb03bc6543f09e","49330ce04dba962c","7b8b407b9a5b80e4","11a21291e045ba35","fb0af513eb5373cd","18b15d232a6e3445","736c1411445384db","ec772fc5e027ce92","8a886a8c6125c03f","8994826bfcb8744c","78b9e17efaa13a08","b9f06807925b4ca8","3366ce31db1d2e3c","2829c630e7be688a","d393a084a3307f3e","9a6a8864046f755b","2219eb827ce1479b","74e3811f45c127cc","704323c0290081f9","cc0d4c783bdf609e","eee8296feff00e9c","8f3653bb685d8879","d4a0f6c0e71d5b60","b8a8740ef8fb5e3d","1b886410406d1322","2c7c7dd0b4f1d053","a5d82febf94a77b2","cc048c25e3a0a1e4","d7501fbc165ba6b9","5ec92c1d022be5a6","f29af909ae01243a","443bf59862e69be5","f9f20a566eae5f54","ae81e4d4438c17ea","1d33650d877594d4","61dc9900fa7c4bb6","ae0c20e622baa51e","daed210c30c99161","4016aed63ea3a086","6c8125c0439b9cb4","7548b66d68e15b1f","e72dbdf5a7a06c3e","1b76067c7c3c413e","99ca90db11863132","d6703d5168b53f62","cea0da2051f618d6","f1dad4485a45de54","c66bb61f2688fc1f","a8d279d821941a26","0df9ab1dbbe325be","ea4dc66b1e608b03","4efa5d8cd36db13d","2e4768bf2efa6343","6d4c329c2f0b84fa","ad0d4545ca378484","5d21446cc012a7df","95508b8e46c1e8a1","bd90aabd54399cac","fcfa10434727799e","8b8c6688b2a691a2","f172de5a04144d3c","683237381467fd41","c5292bb79f7153bf","715a48bb29fc9353","2d4e190829f350f8","f851135b54c79c52","62607b42f9006d60","ef94f7badbee9eaa","5a128a98f5f6ca01","7bd763dd081f2369","3787292fc7c9f9bc","4dbed69d2a8a045e","9ed2392b0da62a6a","f21ed1fb0458ca15","5e2d661fa46ed27f","cca7b0ee82f7fc0a","4ec6b291965be292","1c4eb58d39a6ff8d","69d204c2eaac72c1","929afce5b43d5365","0b7b6f8361abaaf3","4008e9c884561178","266a76ad2127af2a","880bf72006f47940","8f539c89c72b3a65","2eab61e53a9d20d2","0a2de869546a2e07","151438a1cc3d2643","4d19436bf952ec09","b640860614359c7e","f082987f9699a361","57e6c9fb3ade1edf","379b1678530b621e","11edaeb26e2e66f3","832521d908f3b47f","33f9b4d0e562a850","2cceca6df1a900ef","5f418df2c3771fc8","a9130179a7032927","96d1f9e21aa81b98","c3fa8544baa23a35","889c5da5cff0c73c","0ed76a8a6d479e2b","91e806fb1dccf0ab","e2c89cda2b377253","f95a9e5eb89a6e96","4e8f9d7924be95ae","bdf175dc7fee9af3","65d7ba75470c98fd","5afa46047c6f32ac","ffd26916542daece","2d87818261cb77ca","5382acc812d0d2f7","eccfd73b3218080a","077a03176571bee4","f7d815b4bc87f53c","b02dbd4526b3943e","274f71d2794c5585","e8742546d1a74fc0","fc017f610ff4c01e","838381855125c1fd","cd6f35e026ee3c2b","286f33475a216e0a","321053ad6da70d23","f25310f00eddd0b7","92445dad9e4ade21","b09cd31d13c65d59","ef7da2a93163245b","994b63a6dc496a99","2019cfe535f3f5b2","7ea4b46bd8f7c490","ab25bbc70c59ea25","ca3a8743aee2ee9c","95f76389b3e216e9","da56a729e1d56dc8","fe1721a583773e2e","58476c887cb63cc5","cd2996cfb49acd16","f0dd2a95f3809ced","0b5af8dacc453bf1","45d7212f108aa1e4","4273a0e9618242ea","a0752c299b12cbab","fa44f3d97a048d99","90b9843e6b6dc16b","d0af5f6225a770a1","29402b70cc20d5f0","22fab78537689848","1ca3c55e81335048","dbb6aaec64d28a82","1503b90c8babea38","9e49bd65e8bd5891","0f3accae2a4724d8","48f2652f7215bac7","88cdb9659b09b26d","a143bfafb3b7cd38","00ed0b9d8a50d8a4","66e69460daede53d","e95ded696fb26c60","de56803fd0052aaf","0a4022eda0c20c92","5aeb9b0357cf5c42","8d08e72fd9d152a1","c24ffa00c0d9aa1f","1a5af01ff5c9561a","55ef9eabb7363dcd","60fa907f72cb6192","ce56795bc61e5010","ede28ab316458be5","3224847ea97f13e2","351165f625e3ba5d","0f674148ebed0c90","9caa442147f0abde","4b8b5ce3f5a21ac0","dfd685c48376db2f","3ce9e3d7754e8f98","b17c160086ea9baf","0cb717ecea2d012f","6bf626352300445d","1202d7ab03b8ab38","de63089c10e9ec2b","4e3037b151e8b486","8eda3e1af18368d2","6f9cf3fb379872c3","7adc36e4bd74996d","a33da1c41c6587fe","062a69a0beac2990","4bf80ad452f2119a","9ec96a7447ffd262","d207630b40af9ac6","7bb6b476680bf527","7ce08b3f207726bc","6b61fd235be8ef20","71b8a0442320676a","ce8340d327765bb3","1b219f8b80e9e19a","5e5b313bac40a6c3","db92b00a6f13c101","a2a71f6cd5b3ad68","97c46dfd95facb6a","f7968ef5eed66193","befb4b96584be3fe","f13b442aa10020e2","9844095485b33193","797d49f10d418d8c","61fbf7c0a3948d5d","e8ca6ab7b7383cae","0de2e82bac2aed05","3ab3473a0e3e0adc","e1d32addec4472b5","6369ebfde6101458","72ad29e9a669f4e8","6c9cfc9fc2088d3a","1480884fb790d4fd","2d86ae42a686d7b9","b9e065f5dc430e5d","bc5a26422b987b2e","52a141836c31871d","1341280996b5f621","dad4e254b46b6955","cf12d308644fe2a3","954b689d2b9befc1","64560c6aba8c22e5","985b0ecbff1dea30","7c007c4e4fa89bde","653329ae3dad4f27","369335d6bbc4406f","740f0c530ca7537c","ba7199e35163bd65","a9be7016810f7d81","e38d55ebe9a5ebe5","26c571d2405f3b20","7493c6988aeac4a3","6b6189bb6d76f5d1","189b08be485c7b8b","927a71a06578552a","d47b160367d73991","d9f4018a0e25a999","72695f10ab4d34ff","5b7e8aff428cc255","17a469b1dfdec40b","b1de736f5afef4ad","62813068bbcf7bc3","6a66bbe1ced03086","218736f889512bef","de0207d68ada27e9","e243762f0d12b411","3ceed5f9ed0413bd","d75881f7a2133376","e3f3363a72a6481d","c4724eaec7c6ab7c","d31a70331f938f3b","8886b126a19170d4","d61b0ca57a50dc9e","5ec53b26e9a018e1","f8a14377954bc2f6","d93f623572001105","1ec509941938ac44","e0762bc32e121b85","137c6202fac41bb9","6f82b9307571459b","0745dd013ebdd8fc","1bc334ea67640ae8","2a281e4997365d4d","839e2e8a9cff7dbe","f3ce8091b026af5e","530314addb3df282","8dbf196bc58982c0","aa40c3aec53e2d8f","5c6ff2e25937dd68","a15e645301463d22","80ff362c2f0bd0ee","69020f5cc9e5f14a","be379cd1c7864dee","dd5c8833d98a7ae8","19a70bc3fff79d68","83ad8c7481f33c07","1f48348ea732876b","464e6899dec0e6ec","6e3901c3ecb578ac","8c5b6c13aa6de13c","8cc01c23389d363e","634f95b16765cd5f","e83c9a0f5820a646","d88ae0cad71ee068","6ee07f545b2f4e34","ccd0f43ea98d8edc","e014878c6adc2b71","5e13ec51def0790e","dc56c6b3da79fdee","0dc0f995809e9190","f79d33ef99373a2c","8ec8397f16b63965","6a6d46fdbba17288","06de282f1bd78c1d","14a57c1d97bdebb2","700ea5da7da786d2","127fec8d2ac60693","cf9ab61b46f4f612","1417fcf4a059cb19","be8f5d584aaff8c0","bc6b3c6232e760b8","3b01a1de2d131b1a","1c08393dfaa30d54","d46af90b3fd3e09b","44bfeec4d27cea6b","6e6fcc545a8c4caa","27307f033cff9c7f","177097a8b0541003","7a52aecc8cb9185d","b831abfd4539b669","7a4f8c87a3a70362","4497b005a7462bfc","641dff80c720fff9","39e4571cf80224c6","2bb220254f3b72fa","648c414a3d82b68e","2ff9703f9788fdc5","7f8f328e53039359","87a272d8769fa375","4a86560b28d0a188","fa9c50ddb14135ac","af849dcc78751dc4","f6d58f62847df7a8","02c0debb67bbbfeb","292827b390cbb7e4","c014016406c9e7a2","d196e2682b89f470","10d2544502e9336f","600fbb65620a50bb","fae7bddb9c428b06","493bb9ff2665a251","0fc6ecbbc46d4368","6efdcb06edf76325","361365748bb2e59e","ae5e46e2dc8c4c39","74dd087bbedb9548","1c5cf9b45c11cd63","eeaebfac5b5d0888","49aab47ccadbb221","254c27456ce98b7b","59a7ace547cb5da0","33dab50b962dde11","c349d9a79fc39a1f","875a8dad4346f5b2","2ef951eaa2c5eb6a","aced2643cffa05f6","a2b198bfc28d9917","b481334a2ef24022","0a2605a731e2ed9c","bb2b6843eb552345","416e587482f676cd","7912bcdef554f177","964c60f560bc7062","a637e39915bb9a89","6dfa848904b0ef40","ce19a3a682f69ce8","1f222f40e7f7afbc","6051b923e4c782ca","9b51c4dcbb0eeacf","8c0c47ca3974781c","c123aaeca99090f1","c5d9ca6f297b2c48","045a6800bf073f30","faecaae34d4ee2a3","55e077a59b031302","3c52de7e15f7e5e6","9c89d959909a5b30","e90fe5e0af7b5bde","2763e6cf01a9440f","6df88a7aff7f5728","98868596f95ce984","5be30248e84c20b0","ec28bfc6b06b4e4b","e3a07dacb7b86bd1","20bf70b821012a66","26af74c37b5414c3","dbf0c8f96df7a0eb","25eb8a626848a2d4","228d2828b6bf8604","efcef7094452463c","d582de41cee61f6c","79e4df6c61d0f12b","7aa29e57f7c56d97","f86fd02d36274305","b4ecb74a98406e67","e9b180df96be4498","6fef9d0d9b1b7234","f997e1216c9f06e3","27d9b83deea8a050","f62afae7bda1b806","bb6485392131ac81","89738769565b7d4b","229840d8447cd24f","76cd2487cd70e8e9","699b46e2f26cab91","03024a6c4e2c004a","25337ca3f1380869","d28f2fdf3a22031c","d59f7e6fb7251f7d","f55d6b7eebf29c62","10f3e6fb92535077","7d009355184bb252","f274962d84dbf8e3","ea2ed56721bbd966","5a1e25a1ba299496","9d2f4c38756f7da2","75004db67feba856","44d334c6083d24c1","9252caa6ece67819","4e04f03e42fefdaf","c55a00c265945131","3be3c1fdf508bca6","9589bcad07b4f4a6","053f87344a71284d","22f2f8726a804eed","08beda4ccbc456b7","2f792d21515bfb26","cd91dc8fa53e212d","68e6f377ec570596","818614f8f543a269","24235271aaefb44a","33c1bfcdcdb4e239","988f590601432cd9","f6d13f49131fdc51","f6173ec6df6f6f98","53a981afb205b5d1","b2ab1df020282d09","2689b2647f0992e2","3ddbf740f482a74d","9f580c1814d1483a","dc81c22fb346a844","8fd7ea0f5aaddbed","03e8ecbb5e305913","00c98798a97b21ce","5c139dfe35a0a353","9d9e5daf743a7723","1175f8095131bdee","2fc3e992e90a9a7e","10cc881501dae441","d084d6ec935bedd1","b16166fb711346d2","83c373800928dbd5","eac8b16cca865608","3a0dd65b86946b02","ef8ef1230b8b8511","15fb03ab97713f44","a48638ed76dae74e","175271d772de726a","6317cd2f1b10237c","c5539107685cba63","95f2c5ab29918ca5","5bcd312a635f24b8","02f7c98e8ef5863b","46a3872022bdd06a","a8bdb8553a16f58e","fd2468c7e882da89","b4c2da69c7669412","c35634966759e271","8754c4aa7968a1a5","b83f9de2c4ce356f","dd9170fdf49711cc","21718098e580b386","cc14c7d60f927d96","c21c360a41abfa0d","76a886d7506b996d","7073262994fb4f84","7d492be00d58c6cb","0fa38649948f1435","e0fd149e90794627","1f6f6478565976f2","668ab009401caa3d","e4cfe35561994d77","68f07a7d26775f2f","2f563a9a71ad3b7d","da94f46315dcbc56","8b4b4917959520c8","d7ac385504350a64","76f9722294686fcf","c2f2f1437f0c6090","ba82866bf94d580e","634d8c3592aa88c9","72256ef81d4dda4d","25dc2eca9685f055","4ca65694d215b0c1","c28e52ad2ba5d16a","3d807b6d29ba7ea2","95a9a412b6abf6da","01551418f6ba2e04","ae31ab78462909a8","fe3066ac01c2b26e","b33fea0853406520","5e383205095c35c8","a88bf270dc9dd14f","811c04f269fd36d3","a797ca5b17617660","40a7149bf9286bd9","613c50829af13f7c","621480b81e059c7a","358e20cbbac8bb90","9c35d6eab0facd00","d340999656a12355","77fb0f1fc7e8c6f8","38aaf38409928dda","a16449242a5d6da2","d384b9a8e462fdf6","612e3533e03597b7","7ec7c840dac99042","12f5baecbd5e50dd","d8a088ae89bd73d5","d1357367a95119df","e3cfbb8eba36d526","5e3821236ffed171","542acec7bfde4e7e","a277cf3e2c445607","aac2d774105fc435","4f7f7b15be3d937e","19110bfb4e444e62","4b2907776fdb544a","70cb89f6de04693f","c50c32ab0858492f","613a9217b22bea45","f49efd076ab81258","27cc1eb083b5bfe7","3560be5b0e739d3d","375dfab67a07e8ec","8c9ac8f53285b3df","ce4a682eb0ae397f","1f40f1e7f9bbdeca","95681a01ebe7a3aa","bfe9c7f8a7c33d08","28837280597f44a8","97ad537a9aaf1f54","02c5bee51b2244cf","df78c429bd48d6ba","137b8c198924980e","98739c6d055096ef","d049788084b99fb0","fcae9debc80259a2","761223c7fd966e7f","a5b578a44e6eb16f","de1228676952f86f","05de8e1370d1fd71","2b345b6b84bceadb","ef56c022686d5a4c","1a17fbc5792ab5bd","c3812912a71668b8","3d87c283e432ccd4","0927a44928d171ed","889adc1fee98013d","867aaf34d0bf8cd1","6a403e479db5cb69","cc5342e24afdefe6","76ecd8b75d565cf9","498a884e7034b143","2ac5b5077ae775e8","617d0f8f54771f21","a633079196de96bf","a6361109d54d84f8","22f828b22b7d463e","557fa3810af660ae","08f663d1055234a3","c43159f8c209b5ad","d90ca3baae1df596","e8ad75955c73bea3","139a1c08efc5e849","49a40a86b6048df1","e4d9883b87932041","e4e7055baca80c9d","7885475f20325cb8","c2a8a0e275116e18","e991450bbeac6b78","aa8d80abd921962f","b72c3ea5d3ccd5f9","ccaba0ac592a4869","3c430badc18036f5","998880c05f4b6be9","c3db510c7560f8a0","e76bc5d8c1f1334f","6c034e14bc86b55c","a13c478afd39d19f","a9fd4bc7092d32d0","d6a2f04310f717b6","ddb2d11f678900f4","2a828f56b978a99a","09f7cb17c4c0d8df","49807670c869986f","f31843c4aa846fd4","d2f2b304a0efeeb2","9711c6c40241f7f8","78be27a5039cef4a","3a8eedbe7eb9b42d","d6c9cb98b83a7067","ee4435e6a595976b","f5deafb972db6b6c","9a4c21349e2390c5","b866b219ef1167a6","e6a16b1075416c74","edf72e7690bb8174","2574f415ab6ae690","213fe7b92f6c6293","7e99ce5f472e3a48","b206cb71a93f152d","386ca75670f0a9be","b3b146d1dd5927ec","ffa23fbd46910d72","f8e8a897fba9e569","392c938e7c059924","b461f640f3a4e738","ae830b93b4c6f979","c35f24992f7ad27e","a23cc8eb9c4d7907","5a19e8d7763359d7","bb2ced6c92f7f1b9","9af4ab04433b0879","bba1d0cb2b34e8d9","fcf6e9086ae49a0c","082e22ad71477380","cbb437bef98de3cf","8392620c46f309f7","6814b2a6c17ddb93","440ab7a6d00d7d5f","d905db51d2d10071","a72ff5092f5b4d96","6ba899cfcbb36ef0","bf8c628e548ccd30","a5edc95d99bdec70","6011dc3c30452741","6a570c3944cc6b66","0d0c2283b71283ac","11717ebbfa9b9de2","185cd73b2f1673cf","69e79ca94e823db6","198e92ad0279bd47","4540ab5896d60b3f","1d440b885290b375","e56a6e28cc5e9fa1","d53364e3e0d7bac3","aa079dec02b7d19c","fc7e98450eecb3fa","908ff558e6b4f173","72423e8a61f6b62c","7462ddf2e5bfb3ee","1e6c2d7232891ca4","1d159926f4a90738","5088c6bb500c77d4","d3d24496162889d6","678c02513f683658","3ff07fbe3be913a8","9e1258eb17e6d2d6","b3a38d7c1f457f69","1b9409bde806eab6","0b19e675481d9f71","37c6a867c0320ebb","4ccc9100c6aa23db","dbc13582981d9a12","a6475da0cab1d4d2","d0ea0a059f5e130b","45f7fcc44f518da6","17c6a4d8c8324d2f","4e881bab825d48e7","64b6d583679ed21e","8ec525df6d64cd31","9796ff7df0a66bd6","31281a46bde34518","e714c18c54c8bb20","03b03f61815ab814","75c71dd486de3fdd","4f06663e34b4cb08","32117083642ed217","616fa156d0b0592e","9ac6c915dbab76b9","54e4f2b786b26a71","b6943b168c467df2","4759cdd98ee55738","603e667a0d6492cf","8bc640ffebb75f48","39dcb9adb901e65b","f9681ecf4d1d4402","4437d21ebfb6e2b7","ff0982323407a7c1","61401e79bc3dc2c7","46e2820953857e46","322d42706ec6243a","84742c1509dd1cab","05fb0941b8422513","c8a3e6d56d0c7846","fa527e1b35f3b296","27b16ca9d7cfa186","90fa739507995ce2","b50900ff25b8014e","5e5fab49cca06d70","f867602ce6fdd691","05576289701b0194","cbd925ad06a9b23a","603bc61297ebedf2","b1b678c38798f152","5eb13a117d610f78","c6447712f877c4a4","8032a45a1a5932f3","2800255c11472996","2ded466b616cbb46","f1c784bd6e43f899","ee8b9482daafd66a","190f4ca8954ecf05","0e1e8b2d96a44e5e","3299b60e983889ce","8af53b2404755aba","f9dd8b940cb0419a","8358023d098d9942","53e172a42b269dd6","eb0256dc07f58124","1d24eb935e66f417","b4ed1ae017230de4","30b7733826bfb27a","27bd13c36cecc287","896a16c8631e070d","af588bfafdf9f6aa","02506bc06d84aec1","da4108d49f2635e3","1c4182e871cd0f07","b43f74231038f436","4947b6086c1555de","52784f2e15a67099","5d93fcc460b8e9c6","16fe70f0d632d5ae","2fc2770b2914bdb9","3c0e1ad496150d64","2e4c647de563024c","ebdc8664a281cae2","3639453360c81d4d","645a36c2290492c7","74242f6db29da3ba","4663de3ffdd92708","9ec1620bc8e93d97","be254e28a22f783c","658b18d5363801d3","ead893a0dc7c2767","6687943c9c24c666","491c056aa481acfa","557fd7be26100718","551da18fc9d697a3","e868003255fbf6c6","e5417a177c20b969","ad5c1145271fb94c","99dd1085e9248ac6","1f64c7330821bc07","d352d100177148c3","6a844fbf919ebb8b","c00bdd5a3673839a","09a814fa76c30df4","2eaea24a5e6ea7b6","690248c617d860e9","e7190742e7e71a9d","ca1d1082e3705428","795e30b7c2112b51","41773cb002e673fe","80af41d445ce59ff","47690318f1b66c3d","32b235dc83270616","d7af16668b26848c","b38de5a6f7f7a6c6","6e0c1b668961170a","37c674ff3db9e554","b8e1c20160c06883","38731344b79acb5e","413537ea50cc212e","dd40c1b8512d7494","6551a5bdfaac7a9c","5575a0941f190647","a8db43cbe3dddf8c","f15e9e5f68f1e09d","550368e9800c8d9e","c8a8b9032b6480d5","59c32b04a4fd5d76","2363d9bf29d41615","00ca1d6b4dae4a32","dadfcb45f88777fb","a589bc6b1b930402","97182081fa593a3e","c37d90d5e9335970","69e7afe7014835cc","289c2f7c68d79655","6a26a62e4c1994e5","70ac4be170616e34","5b82a429b5a60383","b60648a4fa2b07f0","1eaaa9d3516c515c","360454cc0ba8b24d","24209f270e973ec9","5e28af25837b0784","4eef817929fa1fc4","fce6f19a680a4f3b","ab0ca99631524c08","ddc372f65cf86bfd","4f5d06bab69c6ce6","afd7a309afd91e25","7f62ccd8ffc96ad3","46f08460b835ecd9","793dd39b9aac5ccb","e36f85975cd2522b","bb9c770dc9f40f53","01eedb6b07119ac4","84911cd4f1b48b08","8b2a17310ad86f21","5197d26e1fa961e5","abc7a2b72a342eba","cc59179c11af39b5","46cb064dcd53c20a","89631c715ad86fb0","0efe4de47d12c125","182437a08d6873ca","5cbff1e0cf0b0bf7","546d7f46523e9013","b168d8ce68f02b6b","67ee4013e3d1a990","239ab2903d9e21d2","6c4366d33e4485bc","9aac93a0b30bacb6","48053bb43b8711c7","669dfab483d64f43","fecd6a3b913994b7","0386b41feefe327a","a68f39aae0f9ae74","f8ef0091f9496d80","8f888ef79fa692f9","d59ca1f1eea60efe","45881043b41d41d6","7fab6c3a2fcd1ca6","7f62f0054b17ed50","4bef95a234b802ab","c4295e2cb9993a7f","89354bed9569dd4d","aeb1af3c70a3d3e7","8558a3e6d6806f0f","a95cf7e093bff78c","827df32f60b520ca","6753b8b4e46f741f","904767bafd6487c0","f8d61acfa6fac4cf","f4c6eff0cce99a05","f102dc83f012c613","58b67f08684a3c41","64ae00575452bf6c","0e46d4937c8d7262","8940639f644e7419","20c82424fcecb205","ac16b6ee0af7f5c9","cf813425922a3b8c","abdd9015d2bc7ca3","2d98430a2c6856c0","e841eb267b43b526","cd65be12df426f67","b237a9054f878824","b0660e14a0b29242","d2d57778d345c79a","9b26a3f583bd9a9c","016599fbe1e45fcf","0d9bd8438d4b57cb","9a76946c07cbad54","6b02479a7ceb4416","396311086f454a13","c2dd4157c77ce8c3","2b243f2c5c293b46","020bc51613d0b01d","25e443ecf89af701","22e8ee67a7abe956","331dc636ded789a1","20548f521c38d2a4","eb81037f92265b24","bb38bc5b5ec2f1ee","a85175a764cc8c0e","5e9a95a37de82f83","bd53223b76b61740","eb4a5c644131b72c","b96ac9fbc55f912a","691d6027a6e3deab","e9bf8acb8cc8d42f","076423d7247d23a4","f2cf2d1412408830","de030a30b3afcc6c","76d4529f3501bdc5","dad780578761aae9","00f28ef6ca84f051","0466492dee11e4ba","69520ae4a2136ce4","a8667ca3ed8bb996","53209b43c3809ee5","09dd78a3a61f6116","346dd5a1038ffe3e","42dfa32324efec26","213cc722d20a2d2e","a1137898ea8a07ab","543fedc47f4c469b","a24495db426a5f59","d566e5869893092e","314a926c674a474e","eec0f86002da922d","3f349f73e6a2794b","b3ae32a027e5b2eb","3b56b0d824894098","928132b26bce7e06","dceeedc6e7edb61b","9f1ab891c40a94de"]);
+$('#sub').href=wal('مرحباً، أريد الاشتراك بالبرنامج. أرجو منك تزويدي بكامل التفاصيل.');
+async function hh(c){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(SALT+c));return[...new Uint8Array(b).slice(0,8)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+const norm=c=>c.toUpperCase().replace(/[^A-Z0-9]/g,'');
+async function valid(c){try{return c.length==6&&H.has(await hh(c))}catch(e){return null}}
+function boot(co,code){
+  K='daftarna.v2.'+code;CODE=code;booted=true;S={shop:'',cur:'د.أ',cs:[]};
+  try{const r=localStorage.getItem(K);if(r)S=JSON.parse(r)}catch(e){}
+  mig();if(co)S.shop=co;save();
+  try{localStorage.setItem(LK,JSON.stringify({co:S.shop,code}))}catch(e){}
+  $('#gate').hidden=true;$('#app').hidden=false;sel=null;
+  $('#cur').value=S.cur;$('#shop').value=S.shop;render();
+  let lb=0;try{lb=+localStorage.getItem(K+'.bk')||0}catch(e){}
+  if(S.cs.length&&Date.now()-lb>7*DAY)setTimeout(()=>toast('ننصحك بتنزيل نسخة احتياطية الآن'),600);
+}
+async function login(){
+  const co=$('#co').value.trim(),code=norm($('#code').value),e=$('#err'),v=await valid(code);
+  if(v){boot(co,code);return}
+  e.hidden=false;
+  e.innerHTML=v===null?'تعذّر التحقق من الرمز. افتح الصفحة عبر رابط https.':`اشتراكك غير موجود. يرجى التواصل مع الدعم عبر الواتساب.<a class="btn wa" target="_blank" rel="noopener" href="${wal(`مرحباً، أواجه مشكلة في الدخول إلى البرنامج.\nاسم الشركة: ${co}\nالرمز المُدخل: ${code}\nالمشكلة: `)}">تواصل مع الدعم</a>`;
+}
+$('#go').addEventListener('click',login);
+['#co','#code'].forEach(s=>$(s).addEventListener('keydown',e=>{if(e.key=='Enter')login()}));
+(async()=>{let l=null;try{l=JSON.parse(localStorage.getItem(LK))}catch(e){}
+  if(l&&l.code&&await valid(l.code)){K='daftarna.v2.'+l.code;CODE=l.code;ls('.pin')?lockUI(l):boot(l.co,l.code)}})();
+
+/* ---------- رمز PIN ---------- */
+const ls=(k,v)=>{try{if(v===undefined)return localStorage.getItem(K+k);v===null?localStorage.removeItem(K+k):localStorage.setItem(K+k,v)}catch(e){return null}};
+const ph=async p=>{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(SALT+'pin|'+CODE+'|'+p));return[...new Uint8Array(b).slice(0,12)].map(x=>x.toString(16).padStart(2,'0')).join('')};
+let pin='',LG=null,away=0;
+$('#pad').innerHTML=[1,2,3,4,5,6,7,8,9,'',0,'b'].map(k=>k===''?'<span></span>':`<button data-act="k" data-v="${k}">${k=='b'?'حذف':k}</button>`).join('');
+const dots=()=>document.querySelectorAll('#dots i').forEach((x,i)=>x.classList.toggle('on',i<pin.length));
+function lockUI(l){
+  LG=l||{co:S.shop,code:CODE};pin='';
+  if($('#dlg').open)$('#dlg').close();
+  $('#app').hidden=true;$('#gate').hidden=true;$('#lock').hidden=false;$('#fpbox').hidden=true;
+  $('#lm').textContent='الدفتر مقفل لحماية بياناتك.';dots();
+}
+function unlock(){$('#lock').hidden=true;booted?($('#app').hidden=false):boot(LG.co,LG.code)}
+function wrong(m){$('#lm').textContent=m;$('#dots').classList.add('bad');setTimeout(()=>{$('#dots').classList.remove('bad');pin='';dots()},350)}
+async function key(k){
+  if(k=='b')pin=pin.slice(0,-1);else if(pin.length<4)pin+=k;
+  dots();if(pin.length<4)return;
+  const lu=+ls('.lu')||0;
+  if(Date.now()<lu)return wrong('محاولات كثيرة. حاول بعد '+Math.ceil((lu-Date.now())/1000)+' ثانية');
+  if(await ph(pin)==ls('.pin')){ls('.fl',null);unlock();return}
+  const f=(+ls('.fl')||0)+1;ls('.fl',f);
+  if(f>=5){ls('.lu',Date.now()+30000*(f-4));wrong('محاولات كثيرة. انتظر قليلاً')}else wrong('الرمز غير صحيح')
+}
+document.addEventListener('keydown',e=>{if($('#lock').hidden||e.target.tagName=='INPUT')return;if(/^\d$/.test(e.key))key(e.key);else if(e.key=='Backspace')key('b')});
+document.addEventListener('visibilitychange',()=>{
+  if(!booted||!ls('.pin'))return;
+  if(document.hidden)away=Date.now();
+  else if(away){const lt=ls('.lt'),s=lt==null?60:+lt;if(Date.now()-away>=s*1000)lockUI();away=0}
+});
+function pinDlg(){
+  const d=$('#dlg'),has=ls('.pin'),lt=ls('.lt')||'60',pi='type="password" inputmode="numeric" maxlength="4" autocomplete="off"';
+  d.dataset.t='k';
+  d.innerHTML=`<h3>${has?'إعدادات رمز PIN':'تعيين رمز PIN'}</h3><p class="mu" style="font-size:13px;margin-bottom:12px">${has?'اترك الرمز الجديد فارغاً إذا بدك تغيير القفل التلقائي فقط.':'رمز من 4 أرقام يُطلب عند فتح الدفتر، ويحمي بياناتك من أي شخص يستعمل جهازك.'}</p>
+  ${has?`<label>الرمز الحالي<input id="k0" ${pi}></label>`:''}
+  <label>${has?'رمز جديد (اختياري)':'رمز PIN'}<input id="k1" ${pi}></label><label>تأكيد الرمز<input id="k2" ${pi}></label>
+  <label>القفل التلقائي<select id="k3" style="width:100%">${[['0','فوراً عند مغادرة التطبيق'],['60','بعد دقيقة'],['300','بعد 5 دقائق']].map(o=>`<option value="${o[0]}"${o[0]==lt?' selected':''}>${o[1]}</option>`).join('')}</select></label>
+  <div class="ft" style="flex-wrap:wrap">${has?'<button class="btn" data-act="lockn">قفل الآن</button><button class="btn d2" data-act="pinrm">إزالة الـ PIN</button>':''}<button class="btn" data-act="cancel">إلغاء</button><button class="btn pri" data-act="ok">حفظ</button></div>`;
+  d.showModal();
+}
+async function pinSave(){
+  const has=ls('.pin'),g=i=>($('#'+i)||{}).value||'',bad=i=>{$('#'+i).classList.add('bad');$('#'+i).focus()},n=g('k1');
+  if(has&&await ph(g('k0'))!=has)return bad('k0');
+  if(n||!has){if(!/^\d{4}$/.test(n))return bad('k1');if(n!=g('k2'))return bad('k2');ls('.pin',await ph(n))}
+  ls('.lt',g('k3'));$('#dlg').close();toast(has?'تم تحديث إعدادات PIN':'تم تعيين رمز PIN');
+}
+async function pinRm(){
+  if(await ph($('#k0').value)!=ls('.pin')){$('#k0').classList.add('bad');$('#k0').focus();return}
+  ls('.pin',null);$('#dlg').close();toast('تمت إزالة رمز PIN');
+}
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();ip=e;$('#inst').hidden=false});
+if('serviceWorker'in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
